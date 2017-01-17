@@ -1,0 +1,140 @@
+<div class="row center" *ngIf="showPreLoader" style="margin-top:20px;">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-red-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="col s12 m12 l12" *ngIf="!showPreLoader">
+	<div class="row" *ngIf="isBlogOfCurrentUser === true">
+		<div class="col s12 m12 l12">
+
+		 <div class="preloader-wrapper small active" *ngIf="statusChangeProgress">
+		    <div class="spinner-layer spinner-green-only">
+		      <div class="circle-clipper left">
+		        <div class="circle"></div>
+		      </div><div class="gap-patch">
+		        <div class="circle"></div>
+		      </div><div class="circle-clipper right">
+		        <div class="circle"></div>
+		      </div>
+		    </div>
+	    </div>
+	    <div class="col s2 m2 l2" style="border-right: 2px solid #ee6e73">
+	    	<form *ngIf="!statusChangeProgress">
+					<input name="isPublic" class="filled-in" type="checkbox" id="privateBlog" (change)="changeStatus()" ngModel/>
+	             	<label for="privateBlog"><span class="public-private-input"><span class="status" [innerHTML]='statusString'></span></span></label>
+			</form>
+	    </div>
+	    <div class="col s2 m2 l2">
+	    	<span><i class="material-icons cyan-text actions" (click)="removeBlog()"  style="border-right: 2px solid #80cbc4">delete  </i></span>
+	    	<span><i class="material-icons cyan-text actions" (click)="edit()">mode_edit</i></span>
+	    </div>
+		</div>
+	</div>
+	<div *ngIf="!editMode">
+	  	<h4>{{blogContent.title}}</h4>
+	  	<p>{{blogContent.subtitle}}</p>
+	  	<div class="row divider">
+	  	</div>
+	  	<p class="flow-text" [innerHTML]="blogContent.content"></p>
+	  	<div class="row divider">
+	  	</div>
+	 </div>
+</div>
+
+ <div *ngIf="editMode">
+ 	<div class="row" *ngIf="user!=null">
+	  <div class="col s12 m12 l12">
+	   <form #blogForm="ngForm" (ngSubmit)="edit(blog)">
+	      <div class="input-field col s12 float-text">
+	          <input pattern=".{10,}" id="editBlogTitle" type="text" class="validate" name="title" required title="Minimum 10 characters" [(ngModel)]="editBlog.title">
+	          <label for="editBlogTitle" class="active">Title</label>
+	       </div>
+	       <div class="input-field col s12">
+	          <input pattern=".{10,}" id="editBlogSubtitle" type="text" class="validate" name="subtitle" required title="Minimum 10 characters" [(ngModel)]="editBlog.subtitle">
+	          <label for="editBlogSubtitle" class="active">Subtitle</label>
+	       </div>
+	        <div class="input-field col s12">
+	          <textarea  id="blogDesc" class="materialize-textarea" name="content" required  [(ngModel)]="editBlog.content" rows="20"></textarea>
+	          <label for="blogDesc" class="active">Content</label>
+	        </div>
+	        <div class="row right">
+	          <div class="col s12 m12 l12 right">
+	            <button class="btn-floating btn-large waves-effect waves-light red" [disabled]="showProgress" type="submit"><i class="material-icons">mode_edit</i></button>
+	          </div>
+	        </div>
+	  </form>
+	  </div>
+	    <div class="row">
+		  	<span class="flow-text red-text">{{errorMessageOnEdit}}</span>
+		  </div>
+	</div>
+ </div>
+
+
+
+<div  *ngIf="!showPreLoader && editMode==false">
+	<div class="row" *ngIf="user!=null">
+		<form #comment="ngForm" (ngSubmit)="addComment(comment)">
+		<div class="col s6 m6 l6 push-s3">
+			<div class="input-field col s12 m12 l12">
+				 <textarea  placeholder="Comment here..." id="comments" class="materialize-textarea" name="comment"required ngModel></textarea>
+	  	</div>
+	    <div class="input-field col s12 m12 l12">
+	      <input placeholder="Your name here..." id="name" type="text" name="name" [(ngModel)]="user.auth.email" [disabled]="true">
+	   </div>
+		</div>
+		<div class="col s3 m3 l3">
+			<div class="row" style="margin-top:82px;">
+				  <button class="waves-effect waves-light btn" type="submit"><i class="material-icons left">question_answer</i>Comment</button>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div class="row center" *ngIf="showCommentsPreLoader" style="margin-top:20px;">
+	  <div class="row">
+	    <div class="col s12 m12 l12">
+	      <div class="preloader-wrapper small active">
+	      <div class="spinner-layer spinner-red-only">
+	        <div class="circle-clipper left">
+	          <div class="circle"></div>
+	        </div><div class="gap-patch">
+	          <div class="circle"></div>
+	        </div><div class="circle-clipper right">
+	          <div class="circle"></div>
+	        </div>
+	      </div>
+	    </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="row" *ngIf="!showCommentsPreLoader">
+	<div class="col s6 m6 l6">
+		<ul class="collection">
+		    <li class="collection-item avatar" *ngFor="let cmnt of comments">
+
+		      <img src="../../assets/img/icons/non-user.png" alt="" class="circle" *ngIf="cmnt.profileImage == null">
+		      <img src="{{cmnt.profileImage}}" alt="" class="circle" *ngIf="cmnt.profileImage != null">
+		      <span class="title"><b>{{cmnt.value.name}}</b></span>
+		      <p class="comments">{{cmnt.value.comment}}</p>
+		    </li>
+		</ul>
+	</div>
+	</div>
+</div>
+
+  <div class="row">
+  	<span class="flow-text red-text">{{errorMessage}}</span>
+  </div>

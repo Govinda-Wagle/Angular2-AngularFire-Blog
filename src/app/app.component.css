@@ -1,0 +1,8 @@
+.card {
+	height: auto !important;
+	padding: 10px !important;
+}
+
+.card.large {
+	height: auto !important;
+}

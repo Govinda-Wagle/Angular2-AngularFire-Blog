@@ -1,0 +1,108 @@
+<div class="row right" *ngIf="user !=null">
+  <div class="col s12 m12 l12 right">
+    <button class="btn-floating btn-small waves-effect waves-light red" (click)="toggleAddBlogBtn()">
+      <i class="material-icons tiny">{{visibility}}</i>
+    </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="user!=null">
+  <div *ngIf="toggleAddButton">
+  <div class="col s12 m12 l12">
+   <form #blogForm="ngForm" (ngSubmit)="add(blogForm)">
+      <div class="input-field col s12">
+          <input pattern=".{10,}" Placeholder=" " id="title" type="text" class="validate" name="title" required title="Minimum 10 characters" ngModel>
+           <label for="title" class="active">Title</label>
+       </div>
+       <div class="input-field col s12">
+          <input pattern=".{10,}"  Placeholder=" " id="subtitle" type="text" class="validate" name="subtitle" required title="Minimum 10 characters" ngModel>
+          <label for="subtitle" class="active">Subtitle</label>
+       </div>
+        <div class="input-field col s12">
+          <textarea  id="blogDesc" Placeholder=" " class="materialize-textarea" name="content" required  ngModel rows="20"></textarea>
+          <label for="blogDesc" class="active">Content</label>
+        </div>
+        <div class="col s12 m12 l12">
+          <p class="flow-text">MAKE YOUR BLOG</p>
+        </div>
+          <div class="col s1 m1 l1">
+                <input name="isPublic" type="checkbox" id="privateBlog" value="true" ngModel/>
+                <label for="privateBlog"><span class="public-private-input">Public</span></label>
+         </div>
+
+        <div class="row right">
+          <div class="col s12 m12 l12 right">
+            <button class="btn-floating btn-large waves-effect waves-light red" [disabled]="showProgress" type="submit"><i class="material-icons">done</i></button>
+          </div>
+        </div>
+  </form>
+  </div>
+</div>
+</div>
+
+<div class="row" *ngIf="user">
+    <div class="col s12 m1 l1">
+        <span style="color:#151414;cursor:pointer;font-family: GillSans, Calibri, Trebuchet, sans-serif !important;" (click)="showBlogs('private')" [ngClass]="privateBlogBorderBottom">Your's</span>
+    </div>
+     <div class="col s12 m2 l2">
+        <span style="color:#151414;cursor:pointer;font-family: GillSans, Calibri, Trebuchet, sans-serif !important;" (click)="showBlogs('public')" [ngClass]="publicBlogBorderBottom">Public</span>
+    </div>
+</div>
+ <div class="row divider" *ngIf="user"></div>
+
+  <div class="row center" *ngIf="showPreLoader" style="margin-top:20px;">
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-red-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+<div *ngIf="showPrivateBlogs">
+  <div class="col s12 m12 l12" *ngFor="let blog of privateBlogs; let odd=odd; let even=even" class="blog" (click)="navigateToBlogContent(blog.userId, blog.key)">
+      <blockquote  [ngClass]="{ odd: odd, even: even }">
+        <h4>{{blog.value.title}}</h4>
+        <p>{{blog.value.subtitle}}</p>
+        <span *ngIf="user">Status: <span [ngClass]="{oddStatus:odd, evenStatus:even  }">{{blog.status}}</span></span>
+    </blockquote>
+  </div>
+  <div class="row" *ngIf="privateBlogs.length == 0">
+  <div class="col s12 m12 l12 center">
+    <p class="flow-text red-text"> Private Blogs Not Found.</p>
+  </div>
+</div>
+</div>
+<div *ngIf="showPublicBlogs">
+  <div class="row" *ngIf="user == null && showPreLoader == false">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix cyan-text">search</i>
+          <input id="search" type="text" class="validate" (keyup)="search()" name="searchString" [(ngModel)]="searchString">
+          <label for="search" >Search</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col s12 m12 l12" *ngFor="let blog of publicBlogs; let odd=odd; let even=even" class="blog" (click)="navigateToBlogContent(blog.userId, blog.key)">
+      <blockquote  [ngClass]="{ odd: odd, even: even }">
+        <h4>{{blog.value.title}}</h4>
+        <p>{{blog.value.subtitle}}</p>
+    </blockquote>
+  </div>
+  <div class="row" *ngIf="publicBlogs.length == 0 && publicBlogsNotFound === true">
+  <div class="col s12 m12 l12 center">
+    <p class="flow-text red-text">Public Blogs Not Found.</p>
+  </div>
+</div>
+</div>

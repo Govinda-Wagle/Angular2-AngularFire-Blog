@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row center">
+    <div class="col s12 m12 l12">
+      <img src="../../assets/img/icons/non-user.png" alt="" class="circle">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8 m8 l8 push-s2 push-m2 push-l2">
+      <form class="col s12" (ngSubmit)="createUser(f)" #f="ngForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <input pattern=".{2,20}" placeholder="First Name" id="first_name" type="text" name="firstName" class="validate" required title="2 to 20 characters" ngModel>
+            <label for="first_name">First Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input pattern=".{2,20}" placeholder="Last Name" id="last_name" type="text" name="lastName" class="validate" required title="2 to 20 characters" ngModel>
+            <label for="last_name">Last Name</label>
+          </div>
+        </div>
+        <div ngModelGroup="account">
+           <div class="row">
+            <div class="input-field col s12">
+              <input  maxlength="50" length="50" placeholder="Email" id="email" name="email" type="email" class="validate"   title="Maximum 50 characters" required ngModel>
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input  pattern=".{6,15}" placeholder="Password" id="password" type="password" name="password" class="validate"  required title="6 to 15 characters minimum" ngModel>
+              <label for="password">Password</label>
+            </div>
+          </div>
+           <div class="row">
+            <div class="input-field col s12">
+              <input  placeholder="Confirm your password" id="re-password" type="password" name="confirm" class="validate" ngModel>
+              <label for="re-password">Retype Password</label>
+            </div>
+          </div>
+          <div class="row">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span class="profile-image-text">Profile Image</span>
+                  <input type="file"name="fileName" id="imageFile">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text"  placeHolder="Upload an image">
+                </div>
+              </div>
+          </div>
+            <div class="row">
+              <span class="flow-text red-text">{{errorMessage}}</span>
+            </div>
+        </div>
+         <div class="row">
+               <button class="waves-effect waves-light btn" type="submit" [disabled]="registrationProcess">{{registrationText}}</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+
+.profile-img {
+	width: 9em;
+}
+
+.profile-info {
+	font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+}
+
+.about-info {
+	font-size:15px !important;
+}
+img.node-icon {
+	width: 100%;
+}
+
+.firebase-icon {
+	width: 100%;
+	padding-top:29px;
+}
+
+.php-icon {
+	width: 100%;
+	padding-top:16px;
+}
+
+.ionic-icon {
+	width: 100%;
+	padding-top:26px;
+}
+
+.ternminology-text {
+	font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+}

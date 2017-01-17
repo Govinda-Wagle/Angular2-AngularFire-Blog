@@ -1,0 +1,38 @@
+ <nav class="white black-text">
+    <div class="nav-wrapper">
+    	  <div class="row">
+		  	<div class="col s1"></div>
+			 	<div class="col s10">
+			 		      <a href="#" class="brand-logo"><img src="../assets/img/logos.png" width="120"/></a>
+					      <ul id="nav-mobile" class="right hide-on-med-and-down nav-menus">
+					        <li (click)="navigateToAbout()" class="menuItem addPointer">About</li>
+					        <!-- <li (click)="navigateToGallery()" class="menuItem">Gallery</li> -->
+					        <!-- <li class="menuItem">Articles</li> -->
+					        <li (click)="navigateToBlog()" class="menuItem addPointer">Blog</li>
+					        <!-- <li class="menuItem">Contact</li> -->
+
+					        <li *ngIf="!user" (click)="navigateToLogin()" class="addPointer">Log In</li>
+
+					         <li class="cancel-pointer" *ngIf="user">
+					         	<span >{{user.auth.email}} </span><i class="fa fa-sign-out cyan-text addPointer" aria-hidden="true" (click)="logout()"></i>
+
+					         </li>
+					      </ul>
+						<!--   <ul id="userAccount" class="dropdown-menu">
+							  <li  (click)="logout()">Logout</li>
+						  </ul> -->
+			 	</div>
+			 <div class="col s1"></div>
+		  </div>
+
+
+    </div>
+  </nav>
+
+  <div class="row">
+  	<div class="col s1"></div>
+	 	<div class="col s10 card large">
+	 		<router-outlet></router-outlet>
+	 	</div>
+	 <div class="col s1"></div>
+  </div>

@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row center">
+		<div class="col s12 m12 l12">
+			<img src="../../assets/img/icons/non-user.png" alt="" class="circle">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s8 m8 l8 push-s2 push-m2 push-l2">
+			<form class="col s12" (ngSubmit)="Login(f)" #f="ngForm">
+			       <div class="row">
+			        <div class="input-field col s12">
+			          <input  placeholder="Email"id="email" name="email" type="email" class="validate"  ngModel>
+			          <label for="email">Email</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s12">
+			          <input  placeholder="Password" id="password" type="password" name="password" class="validate" length="6" ngModel>
+			          <label for="password">Password</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			      	<span class="flow-text red-text">{{errorMessage}}</span>
+			      </div>
+		       <div class="row">
+		       		<div class="col s4 m4 l4">
+		       			  <button class="waves-effect waves-light btn" type="submit" [disabled]="loginProcess">{{loginText}}</button>
+		       		</div>
+		       		<div class="col s2 m2 l2" style="margin-top:10px;">
+		       			 <span class="register-link flow-text cyan-text" (click)="navigateToRegistration()">Register</span>
+		       		</div>
+		      </div>
+		    </form>
+		</div>
+	</div>
+</div>

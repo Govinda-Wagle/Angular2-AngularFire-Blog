@@ -1,0 +1,8 @@
+span.register-link {
+	font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+	text-decoration: underline;
+}
+
+span.register-link:hover {
+cursor: pointer;
+}

@@ -1,0 +1,38 @@
+body {
+	background-color: #fcfcfc;
+}
+
+.nav-wrapper {
+	font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+}
+.menuItem {
+	margin-right:20px;
+}
+
+.flow-text {
+	font-size:17px !important;
+}
+
+.comments {
+	font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+}
+
+.nav-menus li.addPointer {
+	cursor: pointer;
+}
+
+.addPointer {
+	cursor: pointer;
+}
+
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.actions:hover {
+	cursor: pointer;
+}
+
+textarea {
+	height: 100% !important;
+}

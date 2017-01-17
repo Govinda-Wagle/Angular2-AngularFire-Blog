@@ -1,0 +1,12 @@
+/*gallery images*/
+.card .card-image img {
+	height: 160px;
+}
+
+.progress {
+	margin-top:0px !important;
+}
+
+span.character-counter {
+	float: none !important;
+}
