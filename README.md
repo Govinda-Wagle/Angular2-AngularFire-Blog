@@ -1,3 +1,8 @@
+#Config
+
+Run npm install
+and add firebase credentials in src/app/config/firebase.config.ts file and you are good to go
+
 # Gw
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.21.
